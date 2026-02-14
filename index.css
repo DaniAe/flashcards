@@ -1,0 +1,22 @@
+body {
+  background-color: rgb(210, 228, 250);
+}
+
+nav {
+  border-bottom: 1px solid rgb(68, 68, 68);
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.deck {
+  border-bottom: 1px solid rgb(205, 205, 205);
+}
+
+img {
+  object-fit: cover;
+  height: 150px;
+  width: 100%; 
+}
