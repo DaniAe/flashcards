@@ -47,13 +47,86 @@
         </div>
       </div>
     </nav>
-    <main class="mx-4 pt-3">
+    <main class="mx-4 pt-3 position-relative">
+      <!-- Add new deck form -->
+      <div
+        class="container my-5 position-absolute start-50 translate-middle-x d-none"
+        id="form_container"
+      >
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-6">
+            <form
+              method="post"
+              action=""
+              class="py-3 bg-white border border-dark rounded-2 pb-4"
+            >
+              <div class="row justify-content-center">
+                <div class="col-10 d-flex justify-content-end">
+                  <button
+                    type="button"
+                    class="btn btn-block rounded-5"
+                    style="color: #b01515"
+                    onclick="removeDeckForm()"
+                  >
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+                <div class="col-10">
+                  <label class="col-form-label" for="deck_name"
+                    >Deck Name:</label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="deck_name"
+                    id="deck_name"
+                    required
+                  />
+                </div>
+                <div class="col-10">
+                  <label class="col-form-label" for="deck_desc"
+                    >Deck Description:</label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="deck_desc"
+                    id="deck_desc"
+                  />
+                </div>
+                <div class="col-10">
+                  <label class="col-form-label" for="img_url">Image URL:</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="img_url"
+                    id="img_url"
+                  />
+                </div>
+                <div class="col-10 mt-4 d-flex justify-content-end">
+                  <button
+                    type="submit"
+                    class="btn btn-block text-white bg-black rounded-5"
+                  >
+                    Create New Deck
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters & Add deck buttons -->
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex gap-3 text-muted">
           <button class="btn p-0"><i class="bi bi-filter"></i> Sort</button>
           <button class="btn p-0"><i class="bi bi-funnel"></i> Filter</button>
         </div>
-        <button class="btn bg-black text-white rounded-5">
+        <button
+          class="btn bg-black text-white rounded-5"
+          onclick="openDeckForm()"
+        >
           <i class="bi bi-plus-lg"></i> Add Deck
         </button>
       </div>
@@ -102,5 +175,6 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+    <script src="index.js"></script>
   </body>
 </html>
