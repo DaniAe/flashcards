@@ -31,7 +31,7 @@
           id="navbarNavAltMarkup"
         >
           <div class="navbar-nav">
-            <a class="nav-link active" href="#"
+            <a class="nav-link active" href="./index.html"
               ><i class="bi bi-book"></i> Decks</a
             >
             <a class="nav-link active" href="#"
@@ -120,11 +120,14 @@
       <!-- Filters & Add deck buttons -->
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex gap-3 text-muted">
+          <a class="btn p-0" href="./decks.html"
+            ><i class="bi bi-view-list"></i> View</a
+          >
           <button class="btn p-0"><i class="bi bi-filter"></i> Sort</button>
           <button class="btn p-0"><i class="bi bi-funnel"></i> Filter</button>
         </div>
         <button
-          class="btn bg-black text-white rounded-5"
+          class="addDeckButton btn text-white rounded-5"
           onclick="openDeckForm()"
         >
           <i class="bi bi-plus-lg"></i> Add Deck
@@ -133,47 +136,47 @@
 
       <!-- Deck Examples -->
       <div class="deck-container mt-5">
-        <div class="row g-4 justify-content-center">
+        <div class="row g-4 justify-content-start">
           <div class="col-12 col-sm-6 col-lg-4">
-            <div class="bg-black text-white rounded-2 p-3">
+            <div class="deck text-white rounded-2 p-3">
               <img
                 src="./images/deckImg1.jpg"
                 alt="Language Image"
                 class="mb-2 rounded-2"
               />
-              <p class="deck mb-0 pt-3 pb-2">Deck 1</p>
+              <p class="deckName mb-0 pt-3 pb-2">Deck 1</p>
               <p class="pt-2">10 cards</p>
             </div>
           </div>
           <div class="col-12 col-sm-6 col-lg-4">
-            <div class="bg-black text-white rounded-2 p-3">
+            <div class="deck text-white rounded-2 p-3">
               <img
                 src="./images/deckImg2.jpg"
                 alt="Programming Image"
                 class="mb-2 rounded-2"
               />
-              <p class="deck mb-0 pt-3 pb-2">Deck 2</p>
+              <p class="deckName mb-0 pt-3 pb-2">Deck 2</p>
               <p class="pt-2">20 cards</p>
             </div>
           </div>
           <div class="col-12 col-sm-6 col-lg-4">
-            <div class="bg-black text-white rounded-2 p-3">
+            <div class="deck text-white rounded-2 p-3">
               <img
                 src="./images/deckImg3.jpg"
                 alt="DNA Image"
                 class="mb-2 rounded-2"
               />
-              <p class="deck mb-0 pt-3 pb-2">Deck 3</p>
+              <p class="deckName mb-0 pt-3 pb-2">Deck 3</p>
               <p class="pt-2">30 cards</p>
             </div>
           </div>
         </div>
       </div>
     </main>
-    <footer class="py-3 text-white bg-black mt-auto">
+    <footer class="py-3 text-white mt-auto">
       <div class="container-fluid">
         <div class="d-md-flex justify-content-center align-items-center pb-2">
-          <h1 class="fs-3 px-md-4">
+          <h1 class="fs-4 px-md-4">
             <i class="bi bi-lightning-charge-fill"></i> Flashwise
           </h1>
           <div class="navbar-nav flex-md-row">
@@ -187,7 +190,9 @@
           class="text-center pt-2"
           style="border-top: 1px solid rgb(68, 68, 68)"
         >
-          <span style="font-size: 0.9rem;">© 2025 Flashwise. All rights reserved. Baltimore, MD.</span>
+          <span style="font-size: 0.9rem"
+            >© 2025 Flashwise. All rights reserved. Baltimore, MD.</span
+          >
         </div>
       </div>
     </footer>
@@ -196,6 +201,6 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script src="index.js"></script>
+    <script src="./index.js"></script>
   </body>
 </html>

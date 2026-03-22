@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(243, 248, 255);
+  background-color: rgb(250, 251, 253);
 }
 
 nav {
@@ -11,12 +11,18 @@ nav {
   text-underline-offset: 4px;
 }
 
-.deck {
+.deck,
+.addDeckButton,
+footer {
+  background-color: #131313;
+}
+
+.deckName {
   border-bottom: 1px solid rgb(205, 205, 205);
 }
 
 img {
   object-fit: cover;
   height: 150px;
-  width: 100%; 
+  width: 100%;
 }
