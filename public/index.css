@@ -12,12 +12,19 @@ nav {
 }
 
 .deck,
-.addDeckButton,
+.add-deck-button,
 footer {
   background-color: #131313;
 }
 
-.deckName {
+.add-deck-button:hover,
+.add-deck-button:active,
+.create-new-deck:hover,
+.create-new-deck:active {
+  background-color: #2a2a2a;
+}
+
+.deck-name {
   border-bottom: 1px solid rgb(205, 205, 205);
 }
 
