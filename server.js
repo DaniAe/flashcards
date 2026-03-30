@@ -9,7 +9,7 @@ let hostname = 'localhost';
 let port = 4000;
 app.use(express.static('public'));
 
-app.get('/items', function (req, res, next) {
+app.get('/items', function (req, res) {
   fs.readFile('./public/data.json', function (err, data) {
     if (err) {
       console.error('Error reading file:', err);
