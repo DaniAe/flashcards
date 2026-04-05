@@ -41,7 +41,8 @@ test('Update method', async function () {
   expect(updated.description).toBe('Studying math2');
   expect(updated.imgUrl).toBe('img3.png');
 
-  await dao.del(updated);
+  await dao.del(updatedDeck.name);
+  await dao.del(deck.name);
 });
 
 test('Delete method', async function () {
@@ -54,9 +55,11 @@ test('Delete method', async function () {
   const ogLength = await dao.readAll();
   await dao.create(deck);
   const newLength = await dao.readAll();
-  await dao.del(deck);
+  await dao.del(deck.name);
 
   expect(newLength.length).toBe(ogLength.length + 1);
+
+  await dao.del(deck.name);
 });
 
 test('Read one deck', async function () {
@@ -70,4 +73,5 @@ test('Read one deck', async function () {
   const oneDeck = await dao.read('Math');
 
   expect(oneDeck).toBe('Math');
+  await dao.del(deck.name);
 });
