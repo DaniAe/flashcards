@@ -7,3 +7,4 @@ function openDeckForm() {
 function removeDeckForm() {
   formContainer.classList.add('d-none');
 }
+
