@@ -1,4 +1,4 @@
-const dao = require('../model/DecksDaoMem');
+const dao = require('../model/DecksDaoMongoose');
 const fs = require('fs');
 
 exports.getAll = function (req, res) {

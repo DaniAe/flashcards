@@ -1,0 +1,36 @@
+const mongoose = require('mongoose');
+
+const deckSchema = mongoose.Schema({
+  name: String,
+  description: String,
+  imgUrl: String,
+  cards: Number,
+});
+
+const deckModel = mongoose.model('deck', deckSchema);
+
+exports.readAll = async function () {
+  const lstDecks = await deckModel.find();
+  return lstDecks;
+};
+
+exports.read = async function (dname) {
+  const deck = await deckModel.findOne({ name: dname });
+  return deck;
+};
+
+exports.create = async function (deck) {
+  const mongodeck = new deckModel(deck);
+  await mongodeck.save();
+  return mongodeck;
+};
+
+exports.update = async function (deck, ogName) {
+  const result = await deckModel.findOneAndUpdate({ name: ogName }, deck);
+  return result;
+};
+
+exports.del = async function (dname) {
+  const result = await deckModel.deleteOne({ name: dname });
+  return result;
+};
