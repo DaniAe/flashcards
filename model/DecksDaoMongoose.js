@@ -34,3 +34,9 @@ exports.del = async function (dname) {
   const result = await deckModel.deleteOne({ name: dname });
   return result;
 };
+
+exports.deleteAll = async function (check) {
+  if (check === 'test') {
+    await deckModel.deleteMany();
+  }
+};
