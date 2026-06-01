@@ -1,0 +1,35 @@
+/* body {
+  background-color: rgb(250, 251, 253);
+}
+
+nav {
+  border-bottom: 1px solid rgb(68, 68, 68);
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.deck,
+.add-deck-button,
+footer {
+  background-color: #131313;
+}
+
+.add-deck-button:hover,
+.add-deck-button:active,
+.create-new-deck:hover,
+.create-new-deck:active {
+  background-color: #2a2a2a;
+}
+
+.deck-name {
+  border-bottom: 1px solid rgb(205, 205, 205);
+}
+
+img {
+  object-fit: cover;
+  height: 150px;
+  width: 100%;
+} */
