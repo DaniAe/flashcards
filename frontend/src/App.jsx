@@ -1,33 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import CardView from './CardView';
-import TableView from './TableView';
 import DeckForm from './shared/components/DeckForm';
+import useDecks from './hooks/useDecks';
+import DecksView from './features/decks/screens/DecksView';
 
 function App() {
   const [toggleForm, setToggleForm] = useState(false);
   const [changeView, setChangeView] = useState(false);
-  const [decks, setDecks] = useState([]);
+  const { readDecks } = useDecks();
 
   let viewIconStyle = 'bi ';
   if (!changeView) viewIconStyle += 'bi-view-stacked';
   else if (changeView) viewIconStyle += 'bi-view-list';
 
-  async function readDecks() {
-    let res = await fetch('http://localhost:4000/items');
-    let lstDecks = await res.json();
-
-    console.log(lstDecks);
-
-    setDecks(lstDecks);
-  }
-  useEffect(() => {
-    readDecks();
-  }, []);
-
   async function handleSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     const formData = new FormData(event.target);
 
@@ -70,7 +58,6 @@ function App() {
               <Link to={'/'} className='nav-link active'>
                 <i className='bi bi-book'></i> Decks
               </Link>
-              {/* <a className='nav-link active' href='./index.html'></a> */}
               <a className='nav-link active' href='#'>
                 <i className='bi bi-square'></i> Cards
               </a>
@@ -123,11 +110,7 @@ function App() {
 
         {/* <!-- Deck Examples --> */}
         <div>
-          {changeView ? (
-            <CardView decks={decks} />
-          ) : (
-            <TableView decks={decks} setDecks={setDecks} />
-          )}
+          <DecksView useDecks={useDecks} changeView={changeView} />
         </div>
       </main>
 
