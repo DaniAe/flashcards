@@ -2,15 +2,16 @@ import { useState } from 'react';
 import DeckForm from '../../../shared/components/DeckForm';
 import useDecks from '../../../hooks/useDecks';
 import DecksView from './DecksView';
+import TableViewIcon from '../../../assets/icons/TableViewIcon';
+import CardViewIcon from '../../../assets/icons/CardViewIcon';
+import FilterIcon from '../../../assets/icons/FilterIcon';
+import SortIcon from '../../../assets/icons/SortIcon';
+import PlusIcon from '../../../assets/icons/PlusIcon';
 
 export default function Homepage() {
   const [toggleForm, setToggleForm] = useState(false);
   const [changeView, setChangeView] = useState(false);
   const { readDecks } = useDecks();
-
-  let viewIconStyle = 'bi ';
-  if (!changeView) viewIconStyle += 'bi-view-stacked';
-  else if (changeView) viewIconStyle += 'bi-view-list';
 
   async function handleSubmit(event) {
     // event.preventDefault();
@@ -38,6 +39,32 @@ export default function Homepage() {
   }
   return (
     <main className='mx-3 pt-3 position-relative pb-5'>
+      {/* <!-- Filters & Add deck buttons --> */}
+      <div className='flex justify-between items-center mb-4'>
+        <div className='flex gap-3 text-muted'>
+          <button
+            className='flex flex-row'
+            onClick={() => setChangeView(!changeView)}
+          >
+            {changeView ? <TableViewIcon /> : <CardViewIcon />}
+            <span>View</span>
+          </button>
+
+          <button className='flex flex-row'>
+            <SortIcon /> <span>Sort</span>
+          </button>
+          <button className='flex flex-row'>
+            <FilterIcon /> <span>Filter</span>
+          </button>
+        </div>
+        <button
+          className='bg-[#131313] text-white px-2 py-1 rounded-full flex flex-row'
+          onClick={() => setToggleForm(true)}
+        >
+          <PlusIcon /> <span>Add Deck</span>
+        </button>
+      </div>
+
       {/* <!-- Add new deck form --> */}
       {toggleForm && (
         <DeckForm
@@ -46,32 +73,6 @@ export default function Homepage() {
           addButtonName={'Create New Deck'}
         />
       )}
-
-      {/* <!-- Filters & Add deck buttons --> */}
-      <div className='d-flex justify-content-between align-items-center mb-4'>
-        <div className='d-flex gap-3 text-muted'>
-          <button
-            className='btn p-0'
-            onClick={() => setChangeView(!changeView)}
-          >
-            <i className={viewIconStyle}></i>
-            View
-          </button>
-
-          <button className='btn p-0'>
-            <i className='bi bi-filter'></i> Sort
-          </button>
-          <button className='btn p-0'>
-            <i className='bi bi-funnel'></i> Filter
-          </button>
-        </div>
-        <button
-          className='add-deck-button btn rounded-5'
-          onClick={() => setToggleForm(true)}
-        >
-          <i className='bi bi-plus-lg'></i> Add Deck
-        </button>
-      </div>
 
       {/* <!-- Deck Examples --> */}
       <DecksView useDecks={useDecks} changeView={changeView} />

@@ -1,36 +1,82 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import CloseButtonIcon from '../../assets/icons/CloseButtonIcon';
 
 export default function NavBar() {
+  const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
+  const [showNav, setShowNav] = useState(false);
+
   return (
-    <nav className='navbar navbar-expand-lg d-flex mx-3'>
-      <div className='container-fluid'>
-        <button
-          className='navbar-toggler'
-          data-bs-toggle='collapse'
-          data-bs-target='#navbarNavAltMarkup'
-        >
-          <span className='navbar-toggler-icon'></span>
-        </button>
-        <div
-          className='collapse navbar-collapse justify-content-center align-items-center py-2 px-1'
-          id='navbarNavAltMarkup'
-        >
-          <div className='navbar-nav'>
-            <Link to={'/'} className='nav-link active'>
-              <i className='bi bi-book'></i> Decks
-            </Link>
-            <a className='nav-link active' href='#'>
-              <i className='bi bi-square'></i> Cards
-            </a>
-            <a className='nav-link active' href='#'>
-              <i className='bi bi-activity'></i> Stats
-            </a>
-            <a className='nav-link active' href='#'>
-              <i className='bi bi-gear'></i> Settings
-            </a>
-          </div>
+    <nav className=''>
+      <div className=''>
+        <div className='pt-2'>
+          {isMobile ? (
+            <div className='flex justify-start items-center'>
+              <button onClick={() => setShowNav(!showNav)}>
+                {showNav ? (
+                  <>
+                    <CloseButtonIcon />
+                    <NavItems />
+                  </>
+                ) : (
+                  <MenuButton />
+                )}
+              </button>
+            </div>
+          ) : (
+            <div className='flex md:justify-center md:items-center'>
+              <NavItems />
+            </div>
+          )}
         </div>
       </div>
     </nav>
+  );
+}
+
+function NavItems() {
+  return (
+    <ul className='md:flex gap-4 text-start'>
+      <li>
+        <Link to={'/'} className='hover:underline'>
+          Decks
+        </Link>
+      </li>
+      <li>
+        <Link to={'/'} className='hover:underline'>
+          Cards
+        </Link>
+      </li>
+      <li>
+        <Link to={'/'} className='hover:underline'>
+          Stats
+        </Link>
+      </li>
+      <li>
+        <Link to={'/'} className='hover:underline'>
+          Settings
+        </Link>
+      </li>
+    </ul>
+  );
+}
+
+function MenuButton() {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      fill='none'
+      viewBox='0 0 24 24'
+      strokeWidth={1.5}
+      stroke='currentColor'
+      className='size-6'
+    >
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'
+      />
+    </svg>
   );
 }

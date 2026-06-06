@@ -1,22 +1,22 @@
 export default function Footer() {
   return (
-    <footer className='py-3 text-white mt-auto'>
-      <div className='container-fluid'>
-        <div className='d-md-flex justify-content-center align-items-center pb-2'>
-          <h1 className='fs-4 px-md-4'>
+    <footer className='py-3 text-white bg-black mt-auto'>
+      <div className=''>
+        <div className='md:flex justify-center items-center pb-2'>
+          <h2 className='md:px-4'>
             <i className='bi bi-lightning-charge-fill'></i> Flashwise
-          </h1>
+          </h2>
           <div className='navbar-nav flex-md-row'>
-            <a className='nav-link active px-3' href='#'>
+            <a className='px-3' href='#'>
               About Us
             </a>
-            <a className='nav-link active px-3' href='#'>
+            <a className='px-3' href='#'>
               Contact Us
             </a>
-            <a className='nav-link active px-3' href='#'>
+            <a className='px-3' href='#'>
               Terms and Conditions
             </a>
-            <a className='nav-link active px-3' href='#'>
+            <a className='px-3' href='#'>
               Policy
             </a>
           </div>

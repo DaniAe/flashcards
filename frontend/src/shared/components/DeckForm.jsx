@@ -1,3 +1,5 @@
+import CloseButtonIcon from '../../assets/icons/CloseButtonIcon';
+
 export default function DeckForm({
   handleSubmit,
   setToggleForm,
@@ -11,78 +13,72 @@ export default function DeckForm({
 }) {
   return (
     <div
-      className='container my-5 position-absolute start-50 translate-middle-x'
+      className='w-fit absolute inset-s-50 translate-x-1/2'
       id='form_container'
     >
-      <div className='row justify-content-center'>
-        <div className='col-12 col-md-6'>
-          <form
-            onSubmit={handleSubmit}
-            className='py-3 bg-white border border-dark rounded-2 pb-4'
-          >
-            <div className='row justify-content-center'>
-              <div className='col-10 d-flex justify-content-end p-0'>
-                <button
-                  type='button'
-                  className='btn btn-block rounded-5'
-                  style={{ color: '#b01515' }}
-                  onClick={() => setToggleForm(false)}
-                >
-                  <i className='bi bi-x-lg'></i>
-                </button>
-              </div>
-              <div className='col-10'>
-                <label className='col-form-label' htmlFor='deck_name'>
-                  Deck Name:
-                </label>
-                <input
-                  className='form-control'
-                  type='text'
-                  name='deck_name'
-                  id='deck_name'
-                  value={deckName}
-                  onChange={handleNameChange}
-                  required
-                />
-              </div>
-              <div className='col-10'>
-                <label className='col-form-label' htmlFor='deck_desc'>
-                  Deck Description:
-                </label>
-                <input
-                  className='form-control'
-                  type='text'
-                  name='deck_desc'
-                  id='deck_desc'
-                  value={deckDesc}
-                  onChange={handleDescChange}
-                />
-              </div>
-              <div className='col-10'>
-                <label className='col-form-label' htmlFor='img_url'>
-                  Image URL:
-                </label>
-                <input
-                  className='form-control'
-                  type='text'
-                  name='img_url'
-                  id='img_url'
-                  value={deckImgUrl}
-                  onChange={handleImgUrlChange}
-                />
-              </div>
-              <div className='col-10 mt-4 d-flex justify-content-end'>
-                <button
-                  type='submit'
-                  className='create-new-deck btn btn-block text-white bg-black rounded-5'
-                >
-                  {addButtonName}
-                </button>
-              </div>
+      <form
+        onSubmit={handleSubmit}
+        className='bg-white border border-dark rounded-2 pt-4 pb-6 px-6 rounded-xl'
+      >
+        <div className='flex justify-center items-center'>
+          <div className='flex flex-col justify-center items-end gap-3'>
+            <div className='flex justify-self-end p-0'>
+              <button
+                className='text-[#b01515]'
+                type='button'
+                onClick={() => setToggleForm(false)}
+              >
+                <CloseButtonIcon />
+              </button>
             </div>
-          </form>
+            <div className=''>
+              <label className='' htmlFor='deck_name'>
+                Deck Name:
+              </label>
+              <input
+                className='border border-black rounded-full'
+                type='text'
+                name='deck_name'
+                id='deck_name'
+                value={deckName}
+                onChange={handleNameChange}
+                required
+              />
+            </div>
+            <div className=''>
+              <label className='' htmlFor='deck_desc'>
+                Deck Description:
+              </label>
+              <input
+                className='border border-black rounded-full'
+                type='text'
+                name='deck_desc'
+                id='deck_desc'
+                value={deckDesc}
+                onChange={handleDescChange}
+              />
+            </div>
+            <div className=''>
+              <label className='' htmlFor='img_url'>
+                Image URL:
+              </label>
+              <input
+                className='border border-black rounded-full'
+                type='text'
+                name='img_url'
+                id='img_url'
+                value={deckImgUrl}
+                onChange={handleImgUrlChange}
+              />
+            </div>
+            <div className=' text-white bg-black border border-black rounded-full px-2 py-1'>
+              <button type='submit' className='create-new-deck'>
+                {addButtonName}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

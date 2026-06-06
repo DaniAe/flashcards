@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div className='min-vh-100 d-flex flex-column'>
+    <div className='min-h-screen flex flex-col bg-white'>
       <NavBar />
       <Outlet />
       <Footer />
