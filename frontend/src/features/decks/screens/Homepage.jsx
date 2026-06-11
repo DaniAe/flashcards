@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import DeckForm from '../../../shared/components/DeckForm';
+import DeckForm from '../components/DeckForm';
 import useDecks from '../../../hooks/useDecks';
-import DecksView from './DecksView';
-import TableViewIcon from '../../../assets/icons/TableViewIcon';
-import CardViewIcon from '../../../assets/icons/CardViewIcon';
 import FilterIcon from '../../../assets/icons/FilterIcon';
 import SortIcon from '../../../assets/icons/SortIcon';
 import PlusIcon from '../../../assets/icons/PlusIcon';
+import CardView from '../components/CardView';
 
 export default function Homepage() {
   const [toggleForm, setToggleForm] = useState(false);
-  const [changeView, setChangeView] = useState(false);
+  // const [showDelButton, setShowDelButton] = useState(false);
+  let showDelButton = false;
+
   const { readDecks } = useDecks();
 
   async function handleSubmit(event) {
@@ -38,30 +38,32 @@ export default function Homepage() {
     readDecks();
   }
   return (
-    <main className='mx-3 pt-3 position-relative pb-5'>
+    <main className='mx-16 pt-6 position-relative'>
       {/* <!-- Filters & Add deck buttons --> */}
-      <div className='flex justify-between items-center mb-4'>
+      <div className='flex justify-between items-center mb-10'>
         <div className='flex gap-3 text-muted'>
-          <button
+          {/* <button
             className='flex flex-row'
             onClick={() => setChangeView(!changeView)}
           >
             {changeView ? <TableViewIcon /> : <CardViewIcon />}
             <span>View</span>
-          </button>
+          </button> */}
 
           <button className='flex flex-row'>
-            <SortIcon /> <span>Sort</span>
+            <SortIcon />
           </button>
           <button className='flex flex-row'>
-            <FilterIcon /> <span>Filter</span>
+            <FilterIcon />
           </button>
         </div>
         <button
-          className='bg-[#131313] text-white px-2 py-1 rounded-full flex flex-row'
-          onClick={() => setToggleForm(true)}
+          className='bg-[#141414] text-white p-2 rounded-full flex flex-row shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] cursor-pointer hover:bg-[rgba(20,20,20,0.8)]'
+          onClick={() => {
+            setToggleForm(true);
+          }}
         >
-          <PlusIcon /> <span>Add Deck</span>
+          <PlusIcon />
         </button>
       </div>
 
@@ -71,11 +73,13 @@ export default function Homepage() {
           handleSubmit={handleSubmit}
           setToggleForm={setToggleForm}
           addButtonName={'Create New Deck'}
+          useDecks={useDecks}
+          showDelButton={showDelButton}
         />
       )}
 
       {/* <!-- Deck Examples --> */}
-      <DecksView useDecks={useDecks} changeView={changeView} />
+      <CardView useDecks={useDecks} />
     </main>
   );
 }
