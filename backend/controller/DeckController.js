@@ -1,4 +1,4 @@
-const dao = require('../../backend/model/DecksDaoMongoose');
+const dao = require('../dao/DecksDaoMongoose');
 
 exports.getAll = async function (req, res) {
   try {
@@ -20,6 +20,7 @@ exports.postCreateUpdate = async function (req, res) {
   let desc = req.body.description;
   let imgUrl = req.body.imgUrl;
   const id = req.body._id;
+  let cards = req.body.cards;
 
   if (id) {
     const updatedDeck = {
@@ -27,6 +28,7 @@ exports.postCreateUpdate = async function (req, res) {
       name: req.body.name,
       description: req.body.description,
       imgUrl: req.body.imgUrl,
+      cards: req.body.cards,
     };
     res.json(await dao.update(updatedDeck));
   } else {

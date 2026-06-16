@@ -42,14 +42,6 @@ export default function Homepage() {
       {/* <!-- Filters & Add deck buttons --> */}
       <div className='flex justify-between items-center mb-10'>
         <div className='flex gap-3 text-muted'>
-          {/* <button
-            className='flex flex-row'
-            onClick={() => setChangeView(!changeView)}
-          >
-            {changeView ? <TableViewIcon /> : <CardViewIcon />}
-            <span>View</span>
-          </button> */}
-
           <button className='flex flex-row'>
             <SortIcon />
           </button>

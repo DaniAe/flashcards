@@ -1,4 +1,5 @@
 const deckCont = require('./controller/DeckController.js');
+const cardCont = require('./controller/CardsController.js');
 
 const express = require('express');
 const morgan = require('morgan');
@@ -20,5 +21,10 @@ app.get('/items', deckCont.getAll);
 app.get('/items/:dname', deckCont.get);
 app.post('/items', deckCont.postCreateUpdate);
 app.get('/deleteitem/:_id', deckCont.getDelete);
+
+app.get('/cards', cardCont.getAll);
+app.get('/cards/:cname', cardCont.get);
+app.post('/cards', cardCont.postCreateUpdate);
+app.get('/cards/:_id', cardCont.getDelete);
 
 exports.app = app;

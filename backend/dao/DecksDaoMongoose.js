@@ -1,13 +1,4 @@
-const mongoose = require('mongoose');
-
-const deckSchema = mongoose.Schema({
-  name: String,
-  description: String,
-  imgUrl: String,
-  cards: Number,
-});
-
-const deckModel = mongoose.model('deck', deckSchema);
+const deckModel = require('../model/deckModel');
 
 exports.readAll = async function () {
   const lstDecks = await deckModel.find();

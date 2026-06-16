@@ -4,6 +4,7 @@ import TrashIcon from '../../../assets/icons/TrashIcon';
 import { useState } from 'react';
 import DeckForm from './DeckForm';
 import ConfirmDeckDelete from './ConfirmDeckDelete';
+import { Link } from 'react-router-dom';
 
 export default function CardView({ useDecks }) {
   const [toggleForm, setToggleForm] = useState(false);
@@ -130,7 +131,12 @@ export default function CardView({ useDecks }) {
                 </div>
 
                 <div className='border-t w-full flex justify-between items-center pt-5 pb-1 font-normal text-[16px]'>
-                  <p>{deck.cards} Cards</p>
+                  <Link
+                    to={`cards/${deck._id}`}
+                    onClick={() => setEditingDeck(deck)}
+                  >
+                    {deck.cards} Cards
+                  </Link>
                   <ForwardArrowIcon />
                 </div>
               </div>
