@@ -1,4 +1,5 @@
 const deckModel = require('../model/deckModel');
+const cardModel = require('../model/cardModel');
 
 exports.readAll = async function () {
   const lstDecks = await deckModel.find();
@@ -24,8 +25,8 @@ exports.update = async function (deck) {
 };
 
 exports.del = async function (id) {
-  const result = await deckModel.findByIdAndDelete(id);
-  return result;
+  await cardModel.deleteMany({ deckId: id });
+  return await deckModel.findByIdAndDelete(id);
 };
 
 exports.deleteAll = async function (check) {
