@@ -20,7 +20,6 @@ exports.postCreateUpdate = async function (req, res) {
   let desc = req.body.description;
   let imgUrl = req.body.imgUrl;
   const id = req.body._id;
-  let cards = req.body.cards;
 
   if (id) {
     const updatedDeck = {

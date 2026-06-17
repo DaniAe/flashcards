@@ -25,6 +25,6 @@ app.get('/deleteitem/:_id', deckCont.getDelete);
 app.get('/cards', cardCont.getAll);
 app.get('/cards/:cname', cardCont.get);
 app.post('/cards', cardCont.postCreateUpdate);
-app.get('/cards/:_id', cardCont.getDelete);
+app.get('/deletecard/:_id', cardCont.getDelete);
 
 exports.app = app;

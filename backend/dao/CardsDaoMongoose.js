@@ -25,5 +25,12 @@ exports.update = async function (card) {
 };
 
 exports.del = async function (id) {
-  return await cardModel.findByIdAndDelete(id);
+  const card = await cardModel.findById(id);
+  await cardModel.findByIdAndDelete(id);
+
+  await deckModel.findByIdAndUpdate(card.deckId, {
+    $inc: { cards: -1 },
+  });
+
+  return card;
 };

@@ -11,8 +11,15 @@ import EditIcon from '../../../assets/icons/EditIcon';
 
 export default function Cards() {
   const [toggleForm, setToggleForm] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [editingCard, setEditingCard] = useState(null);
+  const [inEditMode, setInEditMode] = useState(false);
+
+  const [frontCard, setFrontCard] = useState('');
+  const [backCard, setBackCard] = useState('');
+
   const { decks } = useDecks();
-  const { cards } = useCards();
+  const { cards, readCards } = useCards();
 
   // check if the url & deckId are the same
   const { deckId } = useParams();
@@ -23,7 +30,58 @@ export default function Cards() {
 
   // check if the cards correspond to the deck in the url
   const deckCards = cards.filter((card) => card.deckId === deck._id);
-  let cardsCount = deckCards.length;
+
+  // Edit Card
+  function editCard(card) {
+    setToggleForm(true);
+    setEditingId(card._id);
+    setEditingCard(card);
+
+    setFrontCard(card.front);
+    setBackCard(card.back);
+  }
+
+  const handleFrontChange = (event) => {
+    setFrontCard(event.target.value);
+  };
+
+  const handleBackChange = (event) => {
+    setBackCard(event.target.value);
+  };
+
+  // Update Card
+  async function handleUpdate(event) {
+    // event.preventDefault();
+
+    const updatedCard = {
+      _id: editingId,
+      deckId: deck._id,
+      front: frontCard,
+      back: backCard,
+    };
+
+    const res = await fetch('http://localhost:4000/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedCard),
+    });
+
+    const data = await res.json();
+    console.log('Updated: ' + data);
+
+    await readCards();
+  }
+
+  async function handleDelete(card) {
+    const res = await fetch(`http://localhost:4000/deletecard/${card._id}`, {
+      method: 'GET',
+    });
+    const data = await res.json();
+
+    readCards();
+  }
 
   return (
     <>
@@ -42,10 +100,11 @@ export default function Cards() {
             </button>
           </div>
         </div>
-        <div className='text-[#717171]'>Total Cards: {cardsCount}</div>
+        <div className='text-[#717171]'>Total Cards: {deck.cards}</div>
         <button
           className='bg-[#141414] text-white p-2 rounded-full place-self-end shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] cursor-pointer hover:bg-[rgba(20,20,20,0.8)]'
           onClick={() => {
+            setInEditMode(false);
             setToggleForm(true);
           }}
         >
@@ -54,10 +113,24 @@ export default function Cards() {
       </div>
 
       {/* Add Card Form */}
-      {toggleForm && <CardForm setToggleForm={setToggleForm} deck={deck} />}
+      {toggleForm && (
+        <CardForm
+          setToggleForm={setToggleForm}
+          deck={deck}
+          handleFrontChange={handleFrontChange}
+          setFrontCard={setFrontCard}
+          frontCard={frontCard}
+          handleBackChange={handleBackChange}
+          setBackCard={setBackCard}
+          backCard={backCard}
+          handleUpdate={handleUpdate}
+          inEditMode={inEditMode}
+          handleDelete={handleDelete}
+          editingCard={editingCard}
+        />
+      )}
 
-      {/* Cards Count */}
-
+      {/* Cards */}
       <div className='flex flex-col gap-6'>
         {deckCards.map((card) => (
           <div
@@ -70,10 +143,9 @@ export default function Cards() {
             </div>
             <a
               onClick={() => {
-                setEditingDeck(deck);
-                editDeck(deck);
+                setInEditMode(true);
+                editCard(card);
               }}
-              className=''
             >
               <EditIcon />
             </a>

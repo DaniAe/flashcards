@@ -13,22 +13,24 @@ exports.postCreateUpdate = async function (req, res) {
   let front = req.body.front;
   let back = req.body.back;
   const deckId = req.body.deckId;
+  const id = req.body._id;
 
-  // if (deckId) {
-  //   const updatedCard = {
-  //     _id: deckId,
-  //     front: req.body.front,
-  //     back: req.body.back,
-  //   };
-  //   res.json(await dao.update(updatedCard));
-  // } else {
-  const newCard = {
-    deckId,
-    front,
-    back,
-  };
-  res.json(await dao.create(newCard));
-  // }
+  if (id) {
+    const updatedCard = {
+      _id: id,
+      deckId: deckId,
+      front: req.body.front,
+      back: req.body.back,
+    };
+    res.json(await dao.update(updatedCard));
+  } else {
+    const newCard = {
+      deckId,
+      front,
+      back,
+    };
+    res.json(await dao.create(newCard));
+  }
 };
 
 exports.getDelete = async function (req, res) {

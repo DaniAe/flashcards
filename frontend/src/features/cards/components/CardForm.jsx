@@ -4,18 +4,18 @@ import useDecks from '../../../hooks/useDecks';
 
 export default function CardForm({
   setToggleForm,
-  addButtonName,
-  deckName,
-  handleNameChange,
-  deckImgUrl,
-  handleImgUrlChange,
-  editingDeck,
-  handleDelete,
-  showDelButton,
-  setShowDeleteConfirm,
+  handleFrontChange,
+  setFrontCard,
+  frontCard,
+  handleBackChange,
+  setBackCard,
+  backCard,
   deck,
+  handleUpdate,
+  inEditMode,
+  handleDelete,
+  editingCard,
 }) {
-  const { decks } = useDecks;
   const { readCards } = useCards();
 
   async function handleSubmit(event) {
@@ -37,15 +37,14 @@ export default function CardForm({
     });
 
     const data = await res.json();
-    // console.log('Card Created: ', data);
 
-    readCards();
+    await readCards();
   }
 
   return (
     <div className='fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={inEditMode ? handleUpdate : handleSubmit}
         className='bg-white border border-dark rounded-2 pt-4 pb-6 px-6 rounded-2xl shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)]'
       >
         <div className='flex justify-center items-center'>
@@ -54,7 +53,11 @@ export default function CardForm({
               <button
                 className='text-[#b01515]'
                 type='button'
-                onClick={() => setToggleForm(false)}
+                onClick={() => {
+                  setToggleForm(false);
+                  setFrontCard('');
+                  setBackCard('');
+                }}
               >
                 <CloseButtonIcon />
               </button>
@@ -67,8 +70,8 @@ export default function CardForm({
                 type='text'
                 name='card_front'
                 id='card_front'
-                value={deckName}
-                onChange={handleNameChange}
+                value={frontCard}
+                onChange={handleFrontChange}
                 required
               />
             </div>
@@ -80,15 +83,37 @@ export default function CardForm({
                 type='text'
                 name='card_back'
                 id='card_back'
-                value={deckName}
-                onChange={handleNameChange}
+                value={backCard}
+                onChange={handleBackChange}
                 required
               />
             </div>
 
-            <div className='flex justify-end items-center'>
+            <div
+              className={`flex ${
+                inEditMode ? 'justify-between' : 'justify-end'
+              } items-center`}
+            >
+              {inEditMode && (
+                <div className='text-white bg-[#b01515] rounded-full px-2 py-1'>
+                  <button
+                    type='submit'
+                    onClick={() => handleDelete(editingCard)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
               <div className='text-white bg-black rounded-full px-2 py-1'>
-                <button type='submit'>Add Card</button>
+                <button
+                  type='submit'
+                  onSubmit={() => {
+                    setFrontCard('');
+                    setBackCard('');
+                  }}
+                >
+                  {inEditMode ? 'Update Card' : 'Add Card'}
+                </button>
               </div>
             </div>
           </div>
