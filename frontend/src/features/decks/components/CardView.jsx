@@ -5,6 +5,7 @@ import { useState } from 'react';
 import DeckForm from './DeckForm';
 import ConfirmDeckDelete from './ConfirmDeckDelete';
 import { Link } from 'react-router-dom';
+import useCards from '../../../hooks/useCards';
 
 export default function CardView({ useDecks }) {
   const [toggleForm, setToggleForm] = useState(false);
@@ -18,6 +19,7 @@ export default function CardView({ useDecks }) {
   const [deckImgUrl, setDeckImgUrl] = useState('');
 
   const { decks, readDecks } = useDecks();
+  const { cards } = useCards();
 
   function editDeck(deck) {
     setToggleForm(true);
@@ -123,12 +125,15 @@ export default function CardView({ useDecks }) {
                 >
                   <EditIcon />
                 </a>
-                <div className='pt-6 pb-10 w-full'>
+                <Link
+                  to={`flashcards/${deck._id}`}
+                  className='pt-6 pb-10 w-full'
+                >
                   <p className='pb-2'>{deck.name}</p>
                   <p className='text-[#717171] tracking-[1em] pl-[1em] text-[14px] text-center'>
                     PLAY
                   </p>
-                </div>
+                </Link>
 
                 <div className='border-t w-full flex justify-between items-center pt-5 pb-1 font-normal text-[16px]'>
                   <Link
@@ -137,7 +142,7 @@ export default function CardView({ useDecks }) {
                   >
                     {deck.cards} Cards
                   </Link>
-                  <ForwardArrowIcon />
+                  <ForwardArrowIcon size={'size-3.5'} />
                 </div>
               </div>
             </div>

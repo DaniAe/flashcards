@@ -5,6 +5,7 @@ import App from './app/App.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './features/decks/screens/Homepage.jsx';
 import Cards from './features/cards/screens/Cards.jsx';
+import FlashcardPage from './features/flashcard/screens/FlashcardPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/' element={<App />}>
           <Route index element={<Homepage />} />
           <Route path='cards/:deckId' element={<Cards />} />
+          <Route path='flashcards/:deckId' element={<FlashcardPage />} />
         </Route>
       </Routes>
     </Router>

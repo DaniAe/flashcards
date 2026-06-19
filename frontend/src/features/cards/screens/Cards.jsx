@@ -89,7 +89,7 @@ export default function Cards() {
       <div className='grid grid-cols-3 items-center mx-16 py-6'>
         <div className='flex gap-8 text-muted'>
           <Link to={'/'} className='flex items-center gap-2'>
-            <BackArrowIcon /> <span>{deck.name}</span>
+            <BackArrowIcon size={'size-6'} /> <span>{deck.name}</span>
           </Link>
           <div className='flex gap-3'>
             <button>
