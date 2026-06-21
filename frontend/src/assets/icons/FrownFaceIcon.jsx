@@ -1,12 +1,12 @@
-export default function FrownFaceIcon() {
+export default function FrownFaceIcon({color, className}) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
       viewBox='0 0 24 24'
       strokeWidth={1.5}
-      stroke='#CD5F5F'
-      className='size-10'
+      stroke={color}
+      className={className}
     >
       <path
         strokeLinecap='round'

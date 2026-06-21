@@ -15,32 +15,9 @@ export default function CardForm({
   inEditMode,
   handleDelete,
   editingCard,
+  handleSubmit,
+  setShowDeleteConfirm,
 }) {
-  const { readCards } = useCards();
-
-  async function handleSubmit(event) {
-    // event.preventDefault();
-    const formData = new FormData(event.target);
-
-    const newCard = {
-      deckId: deck._id,
-      front: formData.get('card_front'),
-      back: formData.get('card_back'),
-    };
-
-    const res = await fetch('http://localhost:4000/cards', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newCard),
-    });
-
-    const data = await res.json();
-
-    await readCards();
-  }
-
   return (
     <div className='fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
       <form
@@ -64,7 +41,9 @@ export default function CardForm({
             </div>
 
             <div className='flex items-center justify-center'>
-              <label htmlFor='card_front'>Front:</label>
+              <label htmlFor='card_front' className='mr-2'>
+                Front:
+              </label>
               <textarea
                 className='border border-black rounded-2xl p-2'
                 type='text'
@@ -77,7 +56,9 @@ export default function CardForm({
             </div>
 
             <div className='flex items-center justify-center'>
-              <label htmlFor='card_back'>Back:</label>
+              <label htmlFor='card_back' className='mr-2'>
+                Back:
+              </label>
               <textarea
                 className='border border-black rounded-2xl p-2'
                 type='text'
@@ -95,18 +76,20 @@ export default function CardForm({
               } items-center`}
             >
               {inEditMode && (
-                <div className='text-white bg-[#b01515] rounded-full px-2 py-1'>
+                <div className='text-white bg-[#b01515] hover:bg-[rgba(176,21,21,0.8)] transition-colors duration-250 ease-in-out rounded-full'>
                   <button
                     type='submit'
-                    onClick={() => handleDelete(editingCard)}
+                    className='px-2 py-1 cursor-pointer'
+                    onClick={() => setShowDeleteConfirm(true)}
                   >
                     Delete
                   </button>
                 </div>
               )}
-              <div className='text-white bg-black rounded-full px-2 py-1'>
+              <div className='text-white bg-black hover:bg-[rgba(20,20,20,0.85)] transition-colors duration-250 ease-in-out rounded-full'>
                 <button
                   type='submit'
+                  className='px-2 py-1 cursor-pointer'
                   onSubmit={() => {
                     setFrontCard('');
                     setBackCard('');

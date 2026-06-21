@@ -8,12 +8,14 @@ import useDecks from '../../../hooks/useDecks';
 import CardForm from '../components/CardForm';
 import useCards from '../../../hooks/useCards';
 import EditIcon from '../../../assets/icons/EditIcon';
+import ConfirmDeckDelete from '../../decks/components/ConfirmDeckDelete';
 
 export default function Cards() {
   const [toggleForm, setToggleForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editingCard, setEditingCard] = useState(null);
   const [inEditMode, setInEditMode] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const [frontCard, setFrontCard] = useState('');
   const [backCard, setBackCard] = useState('');
@@ -48,6 +50,30 @@ export default function Cards() {
   const handleBackChange = (event) => {
     setBackCard(event.target.value);
   };
+
+  // Create Card
+  async function handleSubmit(event) {
+    // event.preventDefault();
+    const formData = new FormData(event.target);
+
+    const newCard = {
+      deckId: deck._id,
+      front: formData.get('card_front'),
+      back: formData.get('card_back'),
+    };
+
+    const res = await fetch('http://localhost:4000/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newCard),
+    });
+
+    const data = await res.json();
+
+    await readCards();
+  }
 
   // Update Card
   async function handleUpdate(event) {
@@ -89,13 +115,14 @@ export default function Cards() {
       <div className='grid grid-cols-3 items-center mx-16 py-6'>
         <div className='flex gap-8 text-muted'>
           <Link to={'/'} className='flex items-center gap-2'>
-            <BackArrowIcon size={'size-6'} /> <span>{deck.name}</span>
+            <BackArrowIcon size={'size-6'} color={'currentColor'} />
+            <span>{deck.name}</span>
           </Link>
           <div className='flex gap-3'>
-            <button>
+            <button className='cursor-pointer'>
               <SortIcon />
             </button>
-            <button>
+            <button className='cursor-pointer'>
               <FilterIcon />
             </button>
           </div>
@@ -113,45 +140,70 @@ export default function Cards() {
       </div>
 
       {/* Add Card Form */}
-      {toggleForm && (
-        <CardForm
-          setToggleForm={setToggleForm}
-          deck={deck}
-          handleFrontChange={handleFrontChange}
-          setFrontCard={setFrontCard}
-          frontCard={frontCard}
-          handleBackChange={handleBackChange}
-          setBackCard={setBackCard}
-          backCard={backCard}
-          handleUpdate={handleUpdate}
-          inEditMode={inEditMode}
+      {showDeleteConfirm ? (
+        <ConfirmDeckDelete
+          handleSubmit={handleSubmit}
           handleDelete={handleDelete}
-          editingCard={editingCard}
+          setToggleForm={setToggleForm}
+          editingDeck={editingCard}
+          setShowDeleteConfirm={setShowDeleteConfirm}
+          warningText={`You are about to delete a card from the deck `}
+          deckName={deck.name}
         />
+      ) : (
+        <>
+          {toggleForm && (
+            <CardForm
+              setToggleForm={setToggleForm}
+              deck={deck}
+              handleFrontChange={handleFrontChange}
+              setFrontCard={setFrontCard}
+              frontCard={frontCard}
+              handleBackChange={handleBackChange}
+              setBackCard={setBackCard}
+              backCard={backCard}
+              handleUpdate={handleUpdate}
+              inEditMode={inEditMode}
+              handleDelete={handleDelete}
+              editingCard={editingCard}
+              handleSubmit={handleSubmit}
+              setShowDeleteConfirm={setShowDeleteConfirm}
+            />
+          )}
+        </>
       )}
 
       {/* Cards */}
-      <div className='flex flex-col gap-6'>
-        {deckCards.map((card) => (
-          <div
-            key={card._id}
-            className='flex mx-16 gap-4 items-center justify-center'
-          >
-            <div className='grid grid-cols-2 items-center w-full p-2 rounded-full shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)]'>
-              <div>{card.front}</div>
-              <div>{card.back}</div>
-            </div>
-            <a
-              onClick={() => {
-                setInEditMode(true);
-                editCard(card);
-              }}
+      {deckCards.length > 0 ? (
+        <div className='flex flex-col gap-6 pt-5'>
+          {deckCards.map((card) => (
+            <div
+              key={card._id}
+              className='flex mx-16 gap-4 items-center justify-center'
             >
-              <EditIcon />
-            </a>
-          </div>
-        ))}
-      </div>
+              <div className='grid grid-cols-2 items-center w-full py-3 rounded-2xl shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)]'>
+                <div className='place-self-start pl-10 py-2'>{card.front}</div>
+                <div className='place-self-start border-l pl-10 py-2'>
+                  {card.back}
+                </div>
+              </div>
+              <a
+                onClick={() => {
+                  setInEditMode(true);
+                  editCard(card);
+                }}
+              >
+                <EditIcon />
+              </a>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <>
+          <div>No cards yet...</div>
+          <div>Click to '+' button to create a new card in this deck</div>
+        </>
+      )}
     </>
   );
 }

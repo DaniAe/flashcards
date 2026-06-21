@@ -32,7 +32,8 @@ export default function FlashcardPage() {
       <div className='grid grid-cols-3 items-center mx-16 py-6 mt-18'>
         <div className='flex gap-8 text-muted'>
           <Link to={'/'} className='flex items-center gap-2'>
-            <BackArrowIcon size={'size-6'} /> <span>{deck.name}</span>
+            <BackArrowIcon size={'size-6'} color={'currentColor'} />{' '}
+            <span>{deck.name}</span>
           </Link>
         </div>
         <div className='text-[#717171]'>
@@ -45,7 +46,7 @@ export default function FlashcardPage() {
       </div>
 
       {/* Flashcard */}
-      <div className='flex flex-col justify-center items-center pt-6'>
+      <div className='relative flex flex-col items-center mx-auto pt-8 perspective-distant aspect-video'>
         {currentIndex + 1 > deck.cards ? (
           <>
             <div>No Cards Found in the Deck...</div>
@@ -53,14 +54,21 @@ export default function FlashcardPage() {
         ) : (
           <>
             <button
-              className='shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] rounded-2xl w-xs h-64 flex justify-center items-center'
+              className={`absolute shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] rounded-2xl w-xs h-64 flex justify-center items-center  ${
+                showFront ? 'rotate-x-0' : 'rotate-x-180'
+              } transition duration-1000 ease-in-out backface-hidden cursor-pointer`}
               onClick={() => setShowFront((prev) => !prev)}
             >
-              <div>
-                {showFront
-                  ? deckCards[currentIndex]?.front
-                  : deckCards[currentIndex]?.back}
-              </div>
+              {deckCards[currentIndex]?.front}
+            </button>
+
+            <button
+              className={`shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] rounded-2xl w-xs h-64 flex justify-center items-center ${
+                showFront ? '-rotate-x-180' : 'rotate-x-0'
+              } transition duration-1000 ease-in-out backface-hidden cursor-pointer`}
+              onClick={() => setShowFront((prev) => !prev)}
+            >
+              {deckCards[currentIndex]?.back}
             </button>
 
             <div className='flex justify-between items-center w-xs pt-17'>
@@ -70,13 +78,24 @@ export default function FlashcardPage() {
                     ? setCurrentIndex((prev) => prev - 1)
                     : setCurrentIndex(currentIndex)
                 }
+                className={currentIndex > 0 ? 'cursor-pointer' : ''}
               >
-                <BackArrowIcon size={'size-6'} />
+                <BackArrowIcon
+                  size={'size-6'}
+                  color={currentIndex === 0 ? '#A9A9A9' : 'currentColor'}
+                />
               </button>
 
               <div className='flex gap-4'>
-                <SmileFaceIcon />
-                <FrownFaceIcon />
+                <SmileFaceIcon
+                  color={'#40AB55'}
+                  className={'size-10 cursor-pointer'}
+                />
+
+                <FrownFaceIcon
+                  color={'#CD5F5F'}
+                  className={'size-10 cursor-pointer'}
+                />
               </div>
 
               <button
@@ -85,8 +104,16 @@ export default function FlashcardPage() {
                     ? setCurrentIndex((prev) => prev + 1)
                     : setCurrentIndex(currentIndex)
                 }
+                className={
+                  currentIndex + 1 < deck.cards ? 'cursor-pointer' : ''
+                }
               >
-                <ForwardArrowIcon size={'size-6'} />
+                <ForwardArrowIcon
+                  size={'size-6'}
+                  color={
+                    currentIndex + 1 === deck.cards ? '#A9A9A9' : 'currentColor'
+                  }
+                />
               </button>
             </div>
           </>

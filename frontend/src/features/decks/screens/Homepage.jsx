@@ -42,15 +42,15 @@ export default function Homepage() {
       {/* <!-- Filters & Add deck buttons --> */}
       <div className='flex justify-between items-center mb-10'>
         <div className='flex gap-3 text-muted'>
-          <button className='flex flex-row'>
+          <button className='flex flex-row cursor-pointer'>
             <SortIcon />
           </button>
-          <button className='flex flex-row'>
+          <button className='flex flex-row cursor-pointer'>
             <FilterIcon />
           </button>
         </div>
         <button
-          className='bg-[#141414] text-white p-2 rounded-full flex flex-row shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] cursor-pointer hover:bg-[rgba(20,20,20,0.8)]'
+          className='bg-[#141414] text-white p-2 rounded-full flex flex-row shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] cursor-pointer hover:bg-[rgba(20,20,20,0.85)] transition-colors duration-250 ease-in-out'
           onClick={() => {
             setToggleForm(true);
           }}

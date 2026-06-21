@@ -1,12 +1,12 @@
-export default function SmileFaceIcon() {
+export default function SmileFaceIcon({ color, className }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
       viewBox='0 0 24 24'
       strokeWidth={1.5}
-      stroke='#40AB55'
-      className='size-10'
+      stroke={color}
+      className={className}
     >
       <path
         strokeLinecap='round'
