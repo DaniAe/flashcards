@@ -20,12 +20,15 @@ export default function Cards() {
   const [frontCard, setFrontCard] = useState('');
   const [backCard, setBackCard] = useState('');
 
-  const { decks } = useDecks();
-  const { cards, readCards } = useCards();
+  const { decks, decksLoading } = useDecks();
+  const { cards, readCards, cardsLoading } = useCards();
 
   // check if the url & deckId are the same
   const { deckId } = useParams();
   const deck = decks.find((deck) => deck._id === deckId);
+  if (decksLoading) {
+    return <></>;
+  }
   if (!deck) {
     return <p>Deck Not Found</p>;
   }
@@ -200,8 +203,14 @@ export default function Cards() {
         </div>
       ) : (
         <>
-          <div>No cards yet...</div>
-          <div>Click to '+' button to create a new card in this deck</div>
+          {cardsLoading ? (
+            <></>
+          ) : (
+            <>
+              <div>No cards yet...</div>
+              <div>Click to '+' button to create a new card in this deck</div>
+            </>
+          )}
         </>
       )}
     </>

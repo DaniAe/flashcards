@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 export default function useCards() {
   const [cards, setCards] = useState([]);
+  const [cardsLoading, setCardsLoading] = useState(true);
 
   async function readCards() {
     let res = await fetch('http://localhost:4000/cards');
@@ -10,11 +11,12 @@ export default function useCards() {
     // console.log(lstCards);
 
     setCards(lstCards);
+    setCardsLoading(false);
   }
 
   useEffect(() => {
     readCards();
   }, []);
 
-  return { cards, readCards };
+  return { cards, readCards, cardsLoading };
 }

@@ -10,8 +10,8 @@ import FrownFaceIcon from '../../../assets/icons/FrownFaceIcon';
 import ForwardArrowIcon from '../../../assets/icons/ForwardArrowIcon';
 
 export default function FlashcardPage() {
-  const { decks } = useDecks();
-  const { cards } = useCards();
+  const { decks, decksLoading } = useDecks();
+  const { cards, cardsLoading } = useCards();
 
   let [currentIndex, setCurrentIndex] = useState(0);
   let [showFront, setShowFront] = useState(true);
@@ -19,6 +19,10 @@ export default function FlashcardPage() {
   // check if the url & deckId are the same
   const { deckId } = useParams();
   const deck = decks.find((deck) => deck._id === deckId);
+  if (decksLoading) {
+    return <></>;
+  }
+
   if (!deck) {
     return <p>Deck Not Found</p>;
   }
@@ -47,10 +51,8 @@ export default function FlashcardPage() {
 
       {/* Flashcard */}
       <div className='relative flex flex-col items-center mx-auto pt-8 perspective-distant aspect-video'>
-        {currentIndex + 1 > deck.cards ? (
-          <>
-            <div>No Cards Found in the Deck...</div>
-          </>
+        {deckCards.length === 0 ? (
+          <>{cardsLoading ? <></> : <div>No Cards Found in the Deck...</div>}</>
         ) : (
           <>
             <button

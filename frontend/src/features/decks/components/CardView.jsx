@@ -19,7 +19,7 @@ export default function CardView({ useDecks }) {
   const [deckDesc, setDeckDesc] = useState('');
   const [deckImgUrl, setDeckImgUrl] = useState('');
 
-  const { decks, readDecks } = useDecks();
+  const { decks, readDecks, decksLoading } = useDecks();
   const { cards } = useCards();
 
   function editDeck(deck) {
@@ -119,7 +119,7 @@ export default function CardView({ useDecks }) {
                 className='rounded-3xl shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)]'
               >
                 <div className='rounded-2 flex flex-col justify-center items-center'>
-                  <a
+                  <button
                     onClick={() => {
                       setEditingDeck(deck);
                       editDeck(deck);
@@ -127,7 +127,7 @@ export default function CardView({ useDecks }) {
                     className='w-fit place-self-end p-4 cursor-pointer'
                   >
                     <EditIcon />
-                  </a>
+                  </button>
                   {deck.cards > 0 ? (
                     <Link
                       to={`flashcards/${deck._id}`}
@@ -147,12 +147,12 @@ export default function CardView({ useDecks }) {
                     </div>
                   )}
 
-                  <div className='border-t w-full font-normal text-[16px] p-4'>
+                  <div className='w-full font-normal text-[16px] px-4 pb-4'>
                     <Link
                       to={`cards/${deck._id}`}
                       onClick={() => setEditingDeck(deck)}
                     >
-                      <div className='flex justify-between items-center'>
+                      <div className='flex justify-between items-center border-t pt-4'>
                         {deck.cards} Cards
                         <ForwardArrowIcon
                           size={'size-3.5'}
@@ -167,8 +167,14 @@ export default function CardView({ useDecks }) {
           </div>
         ) : (
           <>
-            <div>No decks yet...</div>
-            <div>Click the '+' button to create a new deck</div>
+            {decksLoading ? (
+              <></>
+            ) : (
+              <>
+                <div>No decks yet...</div>
+                <div>Click the '+' button to create a new deck</div>
+              </>
+            )}
           </>
         )}
       </div>
