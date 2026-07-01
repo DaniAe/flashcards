@@ -4,8 +4,10 @@ export default function useDecks() {
   const [decks, setDecks] = useState([]);
   const [decksLoading, setDecksLoading] = useState(true);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   async function readDecks() {
-    let res = await fetch('http://localhost:4000/items');
+    let res = await fetch(`${API_URL}/items`);
     let lstDecks = await res.json();
 
     console.log(lstDecks);

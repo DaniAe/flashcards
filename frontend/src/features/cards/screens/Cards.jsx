@@ -17,6 +17,8 @@ export default function Cards() {
   const [inEditMode, setInEditMode] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [frontCard, setFrontCard] = useState('');
   const [backCard, setBackCard] = useState('');
 
@@ -65,7 +67,7 @@ export default function Cards() {
       back: formData.get('card_back'),
     };
 
-    const res = await fetch('http://localhost:4000/cards', {
+    const res = await fetch(`${API_URL}/cards`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -89,7 +91,7 @@ export default function Cards() {
       back: backCard,
     };
 
-    const res = await fetch('http://localhost:4000/cards', {
+    const res = await fetch(`${API_URL}cards`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -104,7 +106,7 @@ export default function Cards() {
   }
 
   async function handleDelete(card) {
-    const res = await fetch(`http://localhost:4000/deletecard/${card._id}`, {
+    const res = await fetch(`${API_URL}/deletecard/${card._id}`, {
       method: 'GET',
     });
     const data = await res.json();
@@ -117,7 +119,10 @@ export default function Cards() {
       {/* <!-- Filters & Add deck buttons --> */}
       <div className='grid grid-cols-3 items-center py-6'>
         <div className='flex gap-x-8 gap-y-2 flex-wrap text-muted'>
-          <Link to={'/'} className='flex items-center justify-center gap-2 min-w-0'>
+          <Link
+            to={'/'}
+            className='flex items-center justify-center gap-2 min-w-0'
+          >
             <BackArrowIcon size={'size-6'} color={'currentColor'} />
             <span className='truncate'>{deck.name}</span>
           </Link>
@@ -185,7 +190,9 @@ export default function Cards() {
               className='flex gap-4 items-center justify-center'
             >
               <div className='grid grid-cols-1 sm:grid-cols-2 items-center w-full py-3 rounded-2xl shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)]'>
-                <div className='min-w-0 md:place-self-start sm:px-10 py-2 mx-6 sm:mx-0 truncate'>{card.front}</div>
+                <div className='min-w-0 md:place-self-start sm:px-10 py-2 mx-6 sm:mx-0 truncate'>
+                  {card.front}
+                </div>
                 <div className='min-w-0 md:place-self-start sm:border-l border-t sm:border-t-0 mx-6 sm:mx-0 sm:px-10 py-2 truncate'>
                   {card.back}
                 </div>

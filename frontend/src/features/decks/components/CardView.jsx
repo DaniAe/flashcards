@@ -15,6 +15,8 @@ export default function CardView({ useDecks }) {
   let showDelButton = true;
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [deckName, setDeckName] = useState('');
   const [deckDesc, setDeckDesc] = useState('');
   const [deckImgUrl, setDeckImgUrl] = useState('');
@@ -53,7 +55,7 @@ export default function CardView({ useDecks }) {
       imgUrl: deckImgUrl,
     };
 
-    const res = await fetch('http://localhost:4000/items', {
+    const res = await fetch(`${API_URL}/items`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +71,7 @@ export default function CardView({ useDecks }) {
   // DELETE ITEM
 
   async function handleDelete(deck) {
-    const res = await fetch(`http://localhost:4000/deleteitem/${deck._id}`, {
+    const res = await fetch(`${API_URL}/deleteitem/${deck._id}`, {
       method: 'GET',
     });
 

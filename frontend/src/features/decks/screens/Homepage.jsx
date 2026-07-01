@@ -11,6 +11,8 @@ export default function Homepage() {
   // const [showDelButton, setShowDelButton] = useState(false);
   let showDelButton = false;
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const { readDecks } = useDecks();
 
   async function handleSubmit(event) {
@@ -24,7 +26,7 @@ export default function Homepage() {
       imgUrl: formData.get('img_url'),
     };
 
-    const res = await fetch('http://localhost:4000/items', {
+    const res = await fetch(`${API_URL}/items`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
