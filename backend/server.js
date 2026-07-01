@@ -6,6 +6,6 @@ const ExpApp = require('./app');
 
 let port = process.env.PORT || 4000;
 
-ExpApp.app.listen(port, hostname, function () {
+ExpApp.app.listen(port, function () {
   console.log(`Server running in ${port}`);
 });
