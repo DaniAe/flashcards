@@ -112,7 +112,7 @@ export default function CardView({ useDecks }) {
 
       <div>
         {decks.length > 0 ? (
-          <div className='grid md:grid-cols-4 gap-10 pb-20'>
+          <div className='grid lg:grid-cols-4 sm:grid-cols-3 gap-10 pb-20'>
             {decks.map((deck) => (
               <div
                 key={deck._id}

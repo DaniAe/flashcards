@@ -10,10 +10,10 @@ export default function NavBar() {
 
   return (
     <nav className='shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.1)]'>
-      <div className='py-6 mx-16'>
+      <div className='mx-8 lg:mx-16 lg:py-6 pb-16 md:pb-0'>
         {isMobile ? (
-          <div className='flex justify-start items-center'>
-            <button onClick={() => setShowNav(!showNav)}>
+          <div className='fixed left-0 right-0 bg-white flex justify-start items-center'>
+            <button onClick={() => setShowNav(!showNav)} className='py-5 mx-8 flex flex-col gap-y-3'>
               {showNav ? (
                 <>
                   <CloseButtonIcon />

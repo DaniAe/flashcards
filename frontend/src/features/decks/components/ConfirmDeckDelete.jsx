@@ -15,7 +15,7 @@ export default function ConfirmDeckDelete({
         onSubmit={handleSubmit}
         className='bg-white border border-dark rounded-2 py-6 px-6 rounded-2xl shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)]'
       >
-        <div className='flex justify-center items-center w-xs'>
+        <div className='flex justify-center items-center lg:w-xs'>
           <div className='flex flex-col justify-center gap-3'>
             <div className='text-start'>
               <p>

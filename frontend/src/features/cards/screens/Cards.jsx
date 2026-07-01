@@ -113,13 +113,13 @@ export default function Cards() {
   }
 
   return (
-    <>
+    <div className='mx-8 lg:mx-16'>
       {/* <!-- Filters & Add deck buttons --> */}
-      <div className='grid grid-cols-3 items-center mx-16 py-6'>
-        <div className='flex gap-8 text-muted'>
-          <Link to={'/'} className='flex items-center gap-2'>
+      <div className='grid grid-cols-3 items-center py-6'>
+        <div className='flex gap-x-8 gap-y-2 flex-wrap text-muted'>
+          <Link to={'/'} className='flex items-center justify-center gap-2 min-w-0'>
             <BackArrowIcon size={'size-6'} color={'currentColor'} />
-            <span>{deck.name}</span>
+            <span className='truncate'>{deck.name}</span>
           </Link>
           <div className='flex gap-3'>
             <button className='cursor-pointer'>
@@ -130,9 +130,9 @@ export default function Cards() {
             </button>
           </div>
         </div>
-        <div className='text-[#717171]'>Total Cards: {deck.cards}</div>
+        <div className='text-[#717171] truncate'>Total Cards: {deck.cards}</div>
         <button
-          className='bg-[#141414] text-white p-2 rounded-full place-self-end shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] cursor-pointer hover:bg-[rgba(20,20,20,0.8)]'
+          className='bg-[#141414] text-white p-2 rounded-full place-self-end shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] cursor-pointer hover:bg-[rgba(20,20,20,0.8)] self-center'
           onClick={() => {
             setInEditMode(false);
             setToggleForm(true);
@@ -182,11 +182,11 @@ export default function Cards() {
           {deckCards.map((card) => (
             <div
               key={card._id}
-              className='flex mx-16 gap-4 items-center justify-center'
+              className='flex gap-4 items-center justify-center'
             >
-              <div className='grid grid-cols-2 items-center w-full py-3 rounded-2xl shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)]'>
-                <div className='place-self-start pl-10 py-2'>{card.front}</div>
-                <div className='place-self-start border-l pl-10 py-2'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 items-center w-full py-3 rounded-2xl shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)]'>
+                <div className='min-w-0 md:place-self-start sm:px-10 py-2 mx-6 sm:mx-0 truncate'>{card.front}</div>
+                <div className='min-w-0 md:place-self-start sm:border-l border-t sm:border-t-0 mx-6 sm:mx-0 sm:px-10 py-2 truncate'>
                   {card.back}
                 </div>
               </div>
@@ -213,6 +213,6 @@ export default function Cards() {
           )}
         </>
       )}
-    </>
+    </div>
   );
 }

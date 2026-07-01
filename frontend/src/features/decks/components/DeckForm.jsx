@@ -32,7 +32,7 @@ export default function DeckForm({
             </div>
 
             <div>
-              <label htmlFor='deck_name' className='mr-2'>Deck Name:</label>
+              <label htmlFor='deck_name' className='mr-2'>Name:</label>
               <input
                 className='border border-black rounded-full px-2'
                 type='text'

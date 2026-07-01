@@ -38,7 +38,7 @@ export default function Homepage() {
     readDecks();
   }
   return (
-    <main className='mx-16 pt-6 position-relative'>
+    <main className='mx-8 lg:mx-16 pt-6 position-relative'>
       {/* <!-- Filters & Add deck buttons --> */}
       <div className='flex justify-between items-center mb-10'>
         <div className='flex gap-3 text-muted'>

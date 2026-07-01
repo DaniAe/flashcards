@@ -31,18 +31,18 @@ export default function FlashcardPage() {
   const deckCards = cards.filter((card) => card.deckId === deck?._id);
 
   return (
-    <>
+    <div className='mx-8 lg:mx-16'>
       {/* <!-- Filters & Add deck buttons --> */}
-      <div className='grid grid-cols-3 items-center mx-16 py-6 mt-18'>
-        <div className='flex gap-8 text-muted'>
-          <Link to={'/'} className='flex items-center gap-2'>
-            <BackArrowIcon size={'size-6'} color={'currentColor'} />{' '}
-            <span>{deck.name}</span>
+      <div className='grid grid-cols-3 items-center lg:py-6 mt-24 lg:mt-18'>
+        <div className='flex gap-8 text-muted '>
+          <Link to={'/'} className='flex items-center gap-2 min-w-0'>
+            <BackArrowIcon size={'size-6'} color={'currentColor'} />
+            <block className='truncate'>{deck.name}</block>
           </Link>
         </div>
         <div className='text-[#717171]'>
           {currentIndex + 1 <= deck.cards &&
-            `Current Card: ${currentIndex + 1} / ${deck.cards}`}
+            `Card: ${currentIndex + 1} / ${deck.cards}`}
         </div>
         <button className='text-[#717171] place-self-end cursor-pointer'>
           <ClockIcon />
@@ -50,13 +50,13 @@ export default function FlashcardPage() {
       </div>
 
       {/* Flashcard */}
-      <div className='relative flex flex-col items-center mx-auto pt-8 perspective-distant aspect-video'>
+      <div className='relative flex flex-col items-center pt-8 perspective-distant'>
         {deckCards.length === 0 ? (
           <>{cardsLoading ? <></> : <div>No Cards Found in the Deck...</div>}</>
         ) : (
           <>
             <button
-              className={`absolute shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] rounded-2xl w-xs h-64 flex justify-center items-center  ${
+              className={`absolute shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] rounded-2xl w-60 h-60 sm:w-xs sm:h-64 flex justify-center items-center  ${
                 showFront ? 'rotate-x-0' : 'rotate-x-180'
               } transition duration-1000 ease-in-out backface-hidden cursor-pointer`}
               onClick={() => setShowFront((prev) => !prev)}
@@ -65,7 +65,7 @@ export default function FlashcardPage() {
             </button>
 
             <button
-              className={`shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] rounded-2xl w-xs h-64 flex justify-center items-center ${
+              className={`shadow-[0_0.25rem_1.5rem_rgba(0,0,0,0.2)] rounded-2xl w-60 h-60 sm:w-xs sm:h-64 flex justify-center items-center ${
                 showFront ? '-rotate-x-180' : 'rotate-x-0'
               } transition duration-1000 ease-in-out backface-hidden cursor-pointer`}
               onClick={() => setShowFront((prev) => !prev)}
@@ -73,7 +73,7 @@ export default function FlashcardPage() {
               {deckCards[currentIndex]?.back}
             </button>
 
-            <div className='flex justify-between items-center w-xs pt-17'>
+            <div className='flex justify-between items-center w-60 lg:w-xs pt-8 sm:pt-17'>
               <button
                 onClick={() =>
                   currentIndex > 0
@@ -121,6 +121,6 @@ export default function FlashcardPage() {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }
