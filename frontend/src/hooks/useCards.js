@@ -7,7 +7,7 @@ export default function useCards() {
   const API_URL = import.meta.env.VITE_API_URL;
 
   async function readCards() {
-    let res = await fetch(`${API_URL}/cards`);
+    let res = await fetch(`${API_URL}cards`);
     let lstCards = await res.json();
 
     // console.log(lstCards);

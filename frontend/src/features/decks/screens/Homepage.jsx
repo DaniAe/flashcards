@@ -26,7 +26,7 @@ export default function Homepage() {
       imgUrl: formData.get('img_url'),
     };
 
-    const res = await fetch(`${API_URL}/items`, {
+    const res = await fetch(`${API_URL}items`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

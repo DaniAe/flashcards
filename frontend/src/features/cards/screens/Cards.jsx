@@ -67,7 +67,7 @@ export default function Cards() {
       back: formData.get('card_back'),
     };
 
-    const res = await fetch(`${API_URL}/cards`, {
+    const res = await fetch(`${API_URL}cards`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ export default function Cards() {
   }
 
   async function handleDelete(card) {
-    const res = await fetch(`${API_URL}/deletecard/${card._id}`, {
+    const res = await fetch(`${API_URL}deletecard/${card._id}`, {
       method: 'GET',
     });
     const data = await res.json();

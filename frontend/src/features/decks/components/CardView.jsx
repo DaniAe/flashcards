@@ -55,7 +55,7 @@ export default function CardView({ useDecks }) {
       imgUrl: deckImgUrl,
     };
 
-    const res = await fetch(`${API_URL}/items`, {
+    const res = await fetch(`${API_URL}items`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export default function CardView({ useDecks }) {
   // DELETE ITEM
 
   async function handleDelete(deck) {
-    const res = await fetch(`${API_URL}/deleteitem/${deck._id}`, {
+    const res = await fetch(`${API_URL}deleteitem/${deck._id}`, {
       method: 'GET',
     });
 
